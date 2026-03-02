@@ -9,6 +9,9 @@ class Node:
 
 class Solution:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        
+        # method 1
+        
         my_dict = {}
         if head==None:
             return None
@@ -40,5 +43,51 @@ class Solution:
             curr = curr.next
             newCurr = newCurr.next
         return newHead
+
+
+
+
+        
+# method 2
+
+        
+        if head==None:
+            return None
+        
+        curr = head
+        while curr:
+            currNext = curr.next
+            curr.next = Node(curr.val)
+            curr.next.next = currNext
+
+            curr = currNext
+
+        curr = head
+        while curr and curr.next:
+            if curr.random ==None:
+                curr.next.random = None
+            else:
+                curr.next.random = curr.random.next
+            curr= curr.next.next
+
+        newHead =  head.next
+        newCurr= newHead
+        curr = head
+
+        while curr and newCurr:
+            if curr.next:
+                curr.next = curr.next.next
+            else:
+                curr.next = None
+            
+            if newCurr.next:
+                newCurr.next = newCurr.next.next
+            else:
+                newCurr.next = None
+            curr = curr.next
+            newCurr = newCurr.next
+        return newHead
+
+
 
 
