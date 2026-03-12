@@ -24,13 +24,8 @@ def dish(nums):
 
     for i in my_set:
         my_dict[i] = func(nums, len(nums)-1, i)
-
-    max_dish = 0
-    dish_type = None
-    for key,val in my_dict.items():
-        if max_dish<val:
-            max_dish = val
-            dish_type = key
+        
+    dish_type = max(my_dict, key = my_dict.get)
 
     return dish_type
 
